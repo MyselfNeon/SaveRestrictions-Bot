@@ -3,10 +3,13 @@ import asyncio
 import pyrogram
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserAlreadyParticipant, InviteHashExpired, UsernameNotOccupied
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message 
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 from config import API_ID, API_HASH, ERROR_MESSAGE
 from database.db import db
 from Neon.strings import HELP_TXT
+
+# Import login/logout functions from your other plugin
+from your_login_plugin_file import main as login_func, logout as logout_func  
 
 class batch_temp(object):
     IS_BATCH = {}
@@ -15,9 +18,7 @@ async def downstatus(client, statusfile, message, chat):
     while True:
         if os.path.exists(statusfile):
             break
-
         await asyncio.sleep(3)
-      
     while os.path.exists(statusfile):
         with open(statusfile, "r") as downread:
             txt = downread.read()
@@ -33,7 +34,6 @@ async def upstatus(client, statusfile, message, chat):
     while True:
         if os.path.exists(statusfile):
             break
-
         await asyncio.sleep(3)      
     while os.path.exists(statusfile):
         with open(statusfile, "r") as upread:
@@ -56,20 +56,42 @@ def progress(current, total, message, type):
 async def send_start(client: Client, message: Message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
+
+    user_data = await db.get_session(message.from_user.id)
+
+    if user_data:  # already logged in
+        auth_button = InlineKeyboardButton("🚪 Logout", callback_data="logout_user")
+    else:  # not logged in
+        auth_button = InlineKeyboardButton("🔑 Login", callback_data="login_user")
+
     buttons = [[
-        InlineKeyboardButton("❣️ Developer", url = "https://t.me/kingvj01")
+        auth_button
     ],[
         InlineKeyboardButton('🔍 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ', url='https://t.me/vj_bot_disscussion'),
         InlineKeyboardButton('🤖 ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ', url='https://t.me/vj_botz')
     ]]
     reply_markup = InlineKeyboardMarkup(buttons)
+
     await client.send_message(
         chat_id=message.chat.id, 
-        text=f"<b>👋 Hi {message.from_user.mention}, I am Save Restricted Content Bot, I can send you restricted content by its post link.\n\nFor downloading restricted content /login first.\n\nKnow how to use bot by - /help</b>", 
+        text=f"<b>👋 Hi {message.from_user.mention}, I am Save Restricted Content Bot, I can send you restricted content by its post link.\n\nFor downloading restricted content login first.</b>", 
         reply_markup=reply_markup, 
         reply_to_message_id=message.id
     )
     return
+
+
+# callback handler for Login/Logout button
+@Client.on_callback_query(filters.regex("^(login_user|logout_user)$"))
+async def auth_toggle(client: Client, callback_query: CallbackQuery):
+    if callback_query.data == "login_user":
+        await login_func(client, callback_query.message)
+    elif callback_query.data == "logout_user":
+        await logout_func(client, callback_query.message)
+
+    # refresh start menu after login/logout
+    await send_start(client, callback_query.message)
+    await callback_query.answer()
 
 
 # help command
@@ -80,6 +102,7 @@ async def send_help(client: Client, message: Message):
         text=f"{HELP_TXT}"
     )
 
+
 # cancel command
 @Client.on_message(filters.command(["cancel"]))
 async def send_cancel(client: Client, message: Message):
@@ -88,6 +111,7 @@ async def send_cancel(client: Client, message: Message):
         chat_id=message.chat.id, 
         text="**Batch Successfully Cancelled.**"
     )
+
 
 @Client.on_message(filters.text & filters.private)
 async def save(client: Client, message: Message):
@@ -106,7 +130,7 @@ async def save(client: Client, message: Message):
             if batch_temp.IS_BATCH.get(message.from_user.id): break
             user_data = await db.get_session(message.from_user.id)
             if user_data is None:
-                await message.reply("**For Downloading Restricted Content You Have To /login First.**")
+                await message.reply("**For Downloading Restricted Content You Have To Login First.**")
                 batch_temp.IS_BATCH[message.from_user.id] = True
                 return
             try:
@@ -114,7 +138,7 @@ async def save(client: Client, message: Message):
                 await acc.connect()
             except:
                 batch_temp.IS_BATCH[message.from_user.id] = True
-                return await message.reply("**Your Login Session Expired. So /logout First Then Login Again By - /login**")
+                return await message.reply("**Your Login Session Expired. So Logout First Then Login Again.**")
             
             # private
             if "https://t.me/c/" in message.text:
