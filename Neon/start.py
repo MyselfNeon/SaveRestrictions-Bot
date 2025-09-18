@@ -60,15 +60,15 @@ async def send_start(client: Client, message: Message):
     user_data = await db.get_session(message.from_user.id)
 
     if user_data:  # already logged in
-        auth_button = InlineKeyboardButton("🚪 Logout", callback_data="logout_user")
+        auth_button = InlineKeyboardButton("🚪 Lᴏɢᴏᴜᴛ", callback_data="logout_user")
     else:  # not logged in
-        auth_button = InlineKeyboardButton("🔑 Login", callback_data="login_user")
+        auth_button = InlineKeyboardButton("🔑 Lᴏɢɪɴ", callback_data="login_user")
 
     buttons = [[
         auth_button
     ],[
-        InlineKeyboardButton('🔍 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ', url='https://t.me/vj_bot_disscussion'),
-        InlineKeyboardButton('🤖 ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ', url='https://t.me/vj_botz')
+        InlineKeyboardButton('🧑‍💻 Aᴅᴍɪɴ', url='https://t.me/vj_bot_disscussion'),
+        InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/vj_botz')
     ]]
     reply_markup = InlineKeyboardMarkup(buttons)
 
