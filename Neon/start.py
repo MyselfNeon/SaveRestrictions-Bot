@@ -57,10 +57,10 @@ async def send_start(client: Client, message: Message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
     buttons = [[
-        InlineKeyboardButton("🦋 Aᴅᴍɪɴ Pᴀɴᴇʟ", url = "https://t.me/kingvj01")
+        InlineKeyboardButton("🦋 Aᴅᴍɪɴ Pᴀɴᴇʟ", url = "https://myselfneon.github.io/neon/")
     ],[
-        InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/vj_bot_disscussion'),
-        InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/vj_botz')
+        InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
+        InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/NeonFiles')
     ]]
     reply_markup = InlineKeyboardMarkup(buttons)
     await client.send_message(
