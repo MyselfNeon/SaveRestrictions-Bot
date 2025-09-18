@@ -4,7 +4,7 @@ import random
 import pyrogram
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserAlreadyParticipant, InviteHashExpired, UsernameNotOccupied
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from config import API_ID, API_HASH, ERROR_MESSAGE
 from database.db import db
 from Neon.strings import HELP_TXT
@@ -72,11 +72,12 @@ async def send_start(client: Client, message: Message):
         [InlineKeyboardButton("🦋 Aᴅᴍɪɴ Pᴀɴᴇʟ", url="https://myselfneon.github.io/neon/")],
         [
             InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
-            InlineKeyboardButton('ℹ️ Aʙᴏᴜᴛ', callback_data="about")
+            InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/NeonFiles')
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
 
+    # Send Welcome Message
     await client.send_message(
         chat_id=message.chat.id,
         text=(
@@ -89,63 +90,24 @@ async def send_start(client: Client, message: Message):
         reply_to_message_id=message.id
     )
 
+    # React to /start message
     try:
-        await message.react(emoji=random.choice(REACTIONS), big=True)
+        await message.react(
+            emoji=random.choice(REACTIONS),
+            big=True
+        )
     except Exception as e:
         print(f"Reaction failed: {e}")
-
-# -------------------
-# Callback Queries (About & Back)
-# -------------------
-@Client.on_callback_query(filters.regex("about"))
-async def about_page(client: Client, query: CallbackQuery):
-    buttons = [
-        [
-            InlineKeyboardButton("🔙 Back", callback_data="back"),
-            InlineKeyboardButton("💻 Source Code", url="https://github.com/YourRepoHere")
-        ]
-    ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-
-    text = (
-        "**‣ 📝 𝐌𝐘 𝐃𝐄𝐓𝐀𝐈𝐋𝐒**\n\n"
-        "• Mʏ Nᴀᴍᴇ : Neon\n"
-        "• Mʏ Bᴇsᴛ Fʀɪᴇɴᴅ : ???\n"
-        "• Dᴇᴠᴇʟᴏᴘᴇʀ : Neon\n"
-        "• Lɪʙʀᴀʀʏ : Pʏʀᴏɢʀᴀᴍ\n"
-        "• Lᴀɴɢᴜᴀɢᴇ : Pʏᴛʜᴏɴ 𝟹\n"
-        "• DᴀᴛᴀBᴀsᴇ : Mᴏɴɢᴏ DB\n"
-        "• Bᴏᴛ Sᴇʀᴠᴇʀ : Hᴇʀᴏᴋᴜ\n"
-        "• Bᴜɪʟᴅ Sᴛᴀᴛᴜs : ᴠ𝟸.𝟽.𝟷 [Sᴛᴀʙʟᴇ]"
-    )
-    await query.message.edit_text(text, reply_markup=reply_markup)
-
-
-@Client.on_callback_query(filters.regex("back"))
-async def back_page(client: Client, query: CallbackQuery):
-    buttons = [
-        [InlineKeyboardButton("🦋 Aᴅᴍɪɴ Pᴀɴᴇʟ", url="https://myselfneon.github.io/neon/")],
-        [
-            InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
-            InlineKeyboardButton('ℹ️ Aʙᴏᴜᴛ', callback_data="about")
-        ]
-    ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-
-    text = (
-        f"**__‣ 👋 Hi {query.from_user.mention}__**\n\n"
-        "**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
-        "**__🔑 Please /login First — This Is Required For Downloading Content.__**\n\n"
-        "**__📖 Use /help to learn more.__**"
-    )
-    await query.message.edit_text(text, reply_markup=reply_markup)
 
 # -------------------
 # Help command
 # -------------------
 @Client.on_message(filters.command(["help"]))
 async def send_help(client: Client, message: Message):
-    await client.send_message(chat_id=message.chat.id, text=f"{HELP_TXT}")
+    await client.send_message(
+        chat_id=message.chat.id,
+        text=f"{HELP_TXT}"
+    )
 
 # -------------------
 # Cancel command
@@ -153,7 +115,10 @@ async def send_help(client: Client, message: Message):
 @Client.on_message(filters.command(["cancel"]))
 async def send_cancel(client: Client, message: Message):
     batch_temp.IS_BATCH[message.from_user.id] = True
-    await client.send_message(chat_id=message.chat.id, text="**__Batch Successfully Cancelled.__**")
+    await client.send_message(
+        chat_id=message.chat.id,
+        text="**__Batch Successfully Cancelled.__**"
+    )
 
 # -------------------
 # Handle incoming messages
@@ -193,6 +158,7 @@ async def save(client: Client, message: Message):
                 batch_temp.IS_BATCH[message.from_user.id] = True
                 return await message.reply("**__Your Login Session Expired. So /logout First Then Login Again By - /login__**")
 
+            # private chat
             if "https://t.me/c/" in message.text:
                 chatid = int("-100" + datas[4])
                 try:
@@ -201,6 +167,7 @@ async def save(client: Client, message: Message):
                     if ERROR_MESSAGE:
                         await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
+            # bot
             elif "https://t.me/b/" in message.text:
                 username = datas[4]
                 try:
@@ -209,6 +176,7 @@ async def save(client: Client, message: Message):
                     if ERROR_MESSAGE:
                         await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
+            # public
             else:
                 username = datas[3]
                 try:
@@ -246,6 +214,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
     if batch_temp.IS_BATCH.get(message.from_user.id): 
         return
 
+    # Text messages
     if "Text" == msg_type:
         try:
             await client.send_message(chat, f"**__{msg.text}__**", entities=msg.entities, reply_to_message_id=message.id,
@@ -272,10 +241,12 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
         return
 
     asyncio.create_task(upstatus(client, f'{message.id}upstatus.txt', smsg, chat))
+
     caption = msg.caption if msg.caption else None
     if batch_temp.IS_BATCH.get(message.from_user.id): 
         return
 
+    # File types handling
     try:
         if "Document" == msg_type:
             try:
