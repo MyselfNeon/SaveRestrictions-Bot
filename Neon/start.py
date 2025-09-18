@@ -72,13 +72,19 @@ async def send_start(client: Client, message: Message):
     ]]
     reply_markup = InlineKeyboardMarkup(buttons)
 
-    # send welcome message
-    await client.send_message(
-        chat_id=message.chat.id,
-        text=f"<b>👋 Hi {message.from_user.mention}, I am Save Restricted Content Bot, I can send you restricted content by its post link.\n\nFor downloading restricted content /login first.\n\nKnow how to use bot by - /help</b>",
-        reply_markup=reply_markup,
-        reply_to_message_id=message.id
-    )
+    # Send Welcome Message
+await client.send_message(
+    chat_id=message.chat.id,
+    text=(
+        f"<blockquote>**‣ 👋 Hi {message.from_user.mention}**</blockquote>\n\n"
+        "**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
+        "**🔑 __Please /login First — This Is Required For Downloading Content.__**\n\n"
+        "**__📖 Use /help To Learn More.__**"
+    ),
+    reply_markup=reply_markup,
+    reply_to_message_id=message.id,
+    parse_mode=enums.ParseMode.MARKDOWN
+)
 
     # react to /start message
     try:
