@@ -22,7 +22,7 @@ async def downstatus(client, statusfile, message, chat):
         with open(statusfile, "r") as downread:
             txt = downread.read()
         try:
-            await client.edit_message_text(chat, message.id, f"**Downloaded:** **{txt}**")
+            await client.edit_message_text(chat, message.id, f"**__Downloaded:__** **__{txt}__**")
             await asyncio.sleep(10)
         except:
             await asyncio.sleep(5)
@@ -39,7 +39,7 @@ async def upstatus(client, statusfile, message, chat):
         with open(statusfile, "r") as upread:
             txt = upread.read()
         try:
-            await client.edit_message_text(chat, message.id, f"**Uploaded:** **{txt}**")
+            await client.edit_message_text(chat, message.id, f"**__Uploaded:__** **__{txt}__**")
             await asyncio.sleep(10)
         except:
             await asyncio.sleep(5)
@@ -86,14 +86,14 @@ async def send_cancel(client: Client, message: Message):
     batch_temp.IS_BATCH[message.from_user.id] = True
     await client.send_message(
         chat_id=message.chat.id, 
-        text="**Batch Successfully Cancelled.**"
+        text="**__Batch Successfully Cancelled.__**"
     )
 
 @Client.on_message(filters.text & filters.private)
 async def save(client: Client, message: Message):
     if "https://t.me/" in message.text:
         if batch_temp.IS_BATCH.get(message.from_user.id) == False:
-            return await message.reply_text("**One Task Is Already Processing. Wait For Complete It. If You Want To Cancel This Task Then Use - /cancel**")
+            return await message.reply_text("**__One Task Is Already Processing. Wait For Complete It. If You Want To Cancel This Task Then Use - /cancel__**")
         datas = message.text.split("/")
         temp = datas[-1].replace("?single","").split("-")
         fromID = int(temp[0].strip())
@@ -106,7 +106,7 @@ async def save(client: Client, message: Message):
             if batch_temp.IS_BATCH.get(message.from_user.id): break
             user_data = await db.get_session(message.from_user.id)
             if user_data is None:
-                await message.reply("**For Downloading Restricted Content You Have To /login First.**")
+                await message.reply("**__For Downloading Restricted Content You Have To /login First.__**")
                 batch_temp.IS_BATCH[message.from_user.id] = True
                 return
             try:
@@ -114,7 +114,7 @@ async def save(client: Client, message: Message):
                 await acc.connect()
             except:
                 batch_temp.IS_BATCH[message.from_user.id] = True
-                return await message.reply("**Your Login Session Expired. So /logout First Then Login Again By - /login**")
+                return await message.reply("**__Your Login Session Expired. So /logout First Then Login Again By - /login__**")
             
             # private
             if "https://t.me/c/" in message.text:
@@ -174,7 +174,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
                 await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
             return 
 
-    smsg = await client.send_message(message.chat.id, '**Downloading**', reply_to_message_id=message.id)
+    smsg = await client.send_message(message.chat.id, '**Downloading 🚀**', reply_to_message_id=message.id)
     asyncio.create_task(downstatus(client, f'{message.id}downstatus.txt', smsg, chat))
     try:
         file = await acc.download_media(msg, progress=progress, progress_args=[message,"down"])
