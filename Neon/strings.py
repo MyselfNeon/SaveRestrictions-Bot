@@ -1,23 +1,17 @@
 HELP_TXT = """**🌟 Help Menu** 
 
-**__FOR PRIVATE CHATS__**
+<blockquote>**‣ For Private Chats**</blockquote>
+**__First Send Invite Link Of The Chat (Unnecessary If The Account Of String Session Already Member Of The Chat)
+Then Send Post/s Link__**
 
-__first send invite link of the chat (unnecessary if the account of string session already member of the chat)
-then send post/s link__
-
-
-**__FOR BOT CHATS__**
-
-__send link with '/b/', bot's username and message id, you might want to install some unofficial client to get the id like below__
-
+<blockquote>**‣ For Bot Chats**</blockquote>
+**__Send Link With '/b/', Bot's Username And Message Id, You Might Want To Install Some Unofficial Client To Get The Id Like Below__**
 ```
 https://t.me/b/botusername/4321
 ```
 
-**__MULTI POSTS__**
-
-__send public/private posts link as explained above with formate "from - to" to send multiple messages like below__
-
+<blockquote>**‣ Multi Posts**</blockquote>
+**__Send Public/Private Posts Link As Explained Above With Formate "From - To" To Send Multiple Messages Like Below__**
 
 ```
 https://t.me/xxxx/1001-1010
@@ -25,5 +19,4 @@ https://t.me/xxxx/1001-1010
 https://t.me/c/xxxx/101 - 120
 ```
 
-__note that space in between doesn't matter__"""
-       
+**__Note: Space In Between Doesn't Matter__**"""
