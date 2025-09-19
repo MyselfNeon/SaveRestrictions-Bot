@@ -6,7 +6,8 @@ Then Send Post/s Link__**
 
 <blockquote>**‣ For Bot Chats**</blockquote>
 **__Send Link With '/b/', Bot's Username And Message Id, You Might Want To Install Some Unofficial Client To Get The Id Like Below__**
-```https://t.me/b/botusername/4321
+```
+https://t.me/b/botusername/4321
 ```
 
 <blockquote>**‣ Multi Posts**</blockquote>
