@@ -28,7 +28,7 @@ async def logout(client, message):
 async def main(bot: Client, message: Message):
     user_data = await db.get_session(message.from_user.id)
     if user_data is not None:
-        await message.reply("**__Your Are Already Logged In. First /logout Your Old Session. Then Do /login.__**")
+        await message.reply("**__Your Are Already Logged In. First \n/logout Your Old Session. Then Do \n/login Again !!__ 🔑**")
         return 
     user_id = int(message.from_user.id)
     phone_number_msg = await bot.ask(chat_id=user_id, text="<b>__Please Send Your Phone Number Which Includes Country Code__</b>\n<b>__Example:__</b> <code>+91987654321</code>")
