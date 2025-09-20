@@ -3,7 +3,6 @@ from pyrogram.types import Message
 from config import API_ID, API_HASH, BOT_TOKEN, LOG_CHANNEL
 import datetime
 
-
 class Bot(Client):
 
     def __init__(self):
@@ -24,17 +23,17 @@ class Bot(Client):
         # Bot Deploy/Restart log
         now = datetime.datetime.now()
         text = (
-            f"🤖 **Bot Deploy/Restart**\n\n"
-            f"- `{me.username}` is **Up ✅**\n\n"
-            f"📅 **Date:** `{now.strftime('%d-%m-%Y')}`\n"
-            f"⏰ **Time:** `{now.strftime('%H:%M:%S')}`"
+            f"**🤖 __Bot Deployed / Restarted__ ♻️**\n"
+            f"**🌀 __{me.username} is Up__ ✅**\n\n"
+            f"**📅 __Date:** {now.strftime('%d-%m-%Y')}__**\n"
+            f"**⏰ __Time:** {now.strftime('%H:%M:%S')}__**"
         )
         try:
             await self.send_message(LOG_CHANNEL, text)
         except Exception as e:
             print(f"Log send failed: {e}")
 
-        print(f'Bot Powered By @{me.username}')
+        print(f**__Bot Powered By @{me.username}__**)
 
     async def stop(self, *args):
         me = await self.get_me()
@@ -45,9 +44,7 @@ class Bot(Client):
         await super().stop()
         print('Bot Stopped Bye')
 
-
 BotInstance = Bot()
-
 
 # Handler for new users
 @BotInstance.on_message(filters.private & filters.incoming)
@@ -58,15 +55,14 @@ async def new_user_log(bot: Client, message: Message):
 
     # Prepare log
     text = (
-        f"👤 **#NewUser**\n\n"
-        f"- @{bot.me.username}\n\n"
-        f"- **User ID:** `{user.id}`\n"
-        f"- **User:** {user.mention}"
+        f"**#NewUser**\n"
+        f"- **__@{bot.me.username}__**\n\n"
+        f"- **__User ID:__** `{user.id}`\n"
+        f"- **__User: {user.mention}__**"
     )
     try:
         await bot.send_message(LOG_CHANNEL, text)
     except Exception as e:
         print(f"New user log failed: {e}")
-
 
 BotInstance.run()
