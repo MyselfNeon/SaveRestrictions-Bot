@@ -65,7 +65,7 @@ async def new_user_log(bot: Client, message: Message):
 
         text = (
             f"**#NewUser 👤**\n"
-            f"- __@{bot.me.username}__\n\n"
+            f"- **__@{bot.me.username}__**\n\n"
             f"- **__User:__** {user.mention}\n"
             f"- **__User ID:__** `{user.id}`"
         )
