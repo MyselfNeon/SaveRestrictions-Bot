@@ -31,7 +31,7 @@ async def main(bot: Client, message: Message):
         await message.reply("**__Your Are Already Logged In. First \n/logout Your Old Session. Then Do \n/login Again !!__ 🔑**")
         return 
     user_id = int(message.from_user.id)
-    phone_number_msg = await bot.ask(chat_id=user_id, text="<b>__Please Send Your Phone Number Which Includes Country Code__</b>\n<b>__Example:__</b> <code>+91987654321</code>")
+    phone_number_msg = await bot.ask(chat_id=user_id, text="<b>__Please Send Your Phone Number Which Includes Country Code__</b>\n\n<b>__Example:__</b> <code>+91987654321</code>")
     if phone_number_msg.text=='/cancel':
         return await phone_number_msg.reply('<b>__Process Cancelled !!__</b>')
     phone_number = phone_number_msg.text
@@ -40,7 +40,7 @@ async def main(bot: Client, message: Message):
     await phone_number_msg.reply("__Sending OTP...__")
     try:
         code = await client.send_code(phone_number)
-        phone_code_msg = await bot.ask(user_id, "**__Please check for an OTP in Official Telegram Account. If you got it, Send OTP here after Reading the Below Format. \n\nIf OTP is__** `12345`, **__Please Send it as__** `1 2 3 4 5`.\n\n**__Enter /cancel to Cancel The Procces__**", filters=filters.text, timeout=600)
+        phone_code_msg = await bot.ask(user_id, "**__Please Check for an OTP in Official Telegram Account. If you got it, Send OTP here after Reading the Below Format. \n\nIf OTP is__** `12345`, **__Please Send it as__** `1 2 3 4 5`.\n\n**__Enter /cancel to Cancel The Procces__**", filters=filters.text, timeout=600)
     except PhoneNumberInvalid:
         await phone_number_msg.reply('`PHONE_NUMBER` **is invalid.**')
         return
