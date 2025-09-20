@@ -28,7 +28,7 @@ class Bot(Client):
         now = datetime.datetime.now()
         text = (
             f"**🤖 __Bot Deployed / Restarted__ ♻️**\n"
-            f"**🌀 __{me.username} is Up__ ✅**\n\n"
+            f"**🌀 __@{me.username} is Up__ ✅**\n\n"
             f"**📅 __Date:__** __{now.strftime('%d-%m-%Y')}__\n"
             f"**⏰ __Time:__** __{now.strftime('%H:%M:%S')}__"
         )
