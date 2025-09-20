@@ -5,7 +5,7 @@ app = Flask(__name__)
 def hello_world():
     return """
     <body style="background-color:black; color:#39FF14; display:flex; justify-content:center; align-items:flex-start; height:100vh; margin:0; font-family:sans-serif; padding-top:20vh; font-size:4rem;">
-        || MyselfNeon ||
+        Coded By @MyselfNeon
     </body>
     """
 
