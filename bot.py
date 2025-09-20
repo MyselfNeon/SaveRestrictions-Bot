@@ -28,9 +28,9 @@ class Bot(Client):
         now = datetime.datetime.now()
         text = (
             f"**🤖 __Bot Deployed / Restarted__ ♻️**\n"
-            f"**🌀 __@{me.username} is Up__ ✅**\n\n"
-            f"**📅 __Date:__** __{now.strftime('%d-%m-%Y')}__\n"
-            f"**⏰ __Time:__** __{now.strftime('%H:%M:%S')}__"
+            f"**- __@{me.username}__**\n\n"
+            f"**- __Date:__** __{now.strftime('%d-%m-%Y')}__\n"
+            f"**- __Time:__** __{now.strftime('%H:%M:%S')}__"
         )
         try:
             await self.send_message(LOG_CHANNEL, text)
@@ -65,8 +65,8 @@ async def new_user_log(bot: Client, message: Message):
 
         text = (
             f"**#NewUser 👤**\n"
-            f"- **__@{bot.me.username}__**\n\n"
-            f"- **__User:__** {user.mention}\n"
+            f"- __@{bot.me.username}__\n\n"
+            f"- **__User: {user.mention}__**\n"
             f"- **__User ID:__** `{user.id}`"
         )
         try:
