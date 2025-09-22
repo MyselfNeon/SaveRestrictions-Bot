@@ -1,4 +1,4 @@
-#Start.py
+# Start.py
 import os
 import asyncio
 import random
@@ -28,7 +28,6 @@ REACTIONS = [
 async def downstatus(client, statusfile, message, chat):
     while not os.path.exists(statusfile):
         await asyncio.sleep(3)
-
     while os.path.exists(statusfile):
         with open(statusfile, "r") as downread:
             txt = downread.read()
@@ -44,7 +43,6 @@ async def downstatus(client, statusfile, message, chat):
 async def upstatus(client, statusfile, message, chat):
     while not os.path.exists(statusfile):
         await asyncio.sleep(3)
-
     while os.path.exists(statusfile):
         with open(statusfile, "r") as upread:
             txt = upread.read()
@@ -73,12 +71,11 @@ async def send_start(client: Client, message: Message):
         [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ 🤔", callback_data="help_btn")],
         [
             InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
-            InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/NeonFiles')
+            InlineKeyboardButton('About', callback_data="about_btn")
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
 
-    # Send Welcome Message
     await client.send_message(
         chat_id=message.chat.id,
         text=(
@@ -90,7 +87,6 @@ async def send_start(client: Client, message: Message):
         reply_to_message_id=message.id
     )
 
-    # React to /start message
     try:
         await message.react(
             emoji=random.choice(REACTIONS),
@@ -158,7 +154,6 @@ async def save(client: Client, message: Message):
                 batch_temp.IS_BATCH[message.from_user.id] = True
                 return await message.reply("**__Your Login Session Expired. So /logout First Then Login Again By - /login__**")
 
-            # private chat
             if "https://t.me/c/" in message.text:
                 chatid = int("-100" + datas[4])
                 try:
@@ -167,7 +162,6 @@ async def save(client: Client, message: Message):
                     if ERROR_MESSAGE:
                         await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
-            # bot
             elif "https://t.me/b/" in message.text:
                 username = datas[4]
                 try:
@@ -176,7 +170,6 @@ async def save(client: Client, message: Message):
                     if ERROR_MESSAGE:
                         await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
-            # public
             else:
                 username = datas[3]
                 try:
@@ -214,7 +207,6 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
     if batch_temp.IS_BATCH.get(message.from_user.id): 
         return
 
-    # Text messages
     if "Text" == msg_type:
         try:
             await client.send_message(chat, f"**__{msg.text}__**", entities=msg.entities, reply_to_message_id=message.id,
@@ -241,12 +233,10 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
         return
 
     asyncio.create_task(upstatus(client, f'{message.id}upstatus.txt', smsg, chat))
-
     caption = msg.caption if msg.caption else None
     if batch_temp.IS_BATCH.get(message.from_user.id): 
         return
 
-    # File types handling
     try:
         if "Document" == msg_type:
             try:
@@ -350,16 +340,78 @@ def get_message_type(msg: pyrogram.types.messages_and_media.message.Message):
         pass
 
 # -------------------
-# Inline button callback for Admin Panel
+# Inline button callback for Admin Panel / Start Page / About Page
 # -------------------
 @Client.on_callback_query()
 async def button_callbacks(client: Client, callback_query):
-    if callback_query.data == "help_btn":
-        await send_help(client, callback_query.message)
-        await callback_query.answer()  # Acknowledge the button press
+    data = callback_query.data
+    message = callback_query.message
+
+    # Help button
+    if data == "help_btn":
+        await send_help(client, message)
+        await callback_query.answer()
+
+    # About button
+    elif data == "about_btn":
+        me = await client.get_me()
+        bot_name = me.first_name
+        bot_username = me.username
+
+        about_text = (
+            f"• Mʏ Nᴀᴍᴇ : <a href='https://t.me/{bot_username}'>{bot_name}</a>\n"
+            "• Mʏ Bᴇsᴛ Fʀɪᴇɴᴅ : Tʜɪs Sᴡᴇᴇᴛɪᴇ ❤️\n"
+            "• Dᴇᴠᴇʟᴏᴘᴇʀ : @MʏsᴇʟғNᴇᴏɴ\n"
+            "• Lɪʙʀᴀʀʏ : Pʏʀᴏɢʀᴀᴍ\n"
+            "• Lᴀɴɢᴜᴀɢᴇ : Pʏᴛʜᴏɴ 𝟹\n"
+            "• DᴀᴛᴀBᴀsᴇ : Mᴏɴɢᴏ DB\n"
+            "• Bᴏᴛ Sᴇʀᴠᴇʀ : Hᴇʀᴏᴋᴜ\n"
+            "• Bᴜɪʟᴅ Sᴛᴀᴛᴜs : ᴠ𝟸.𝟽.𝟷 [Sᴛᴀʙʟᴇ]"
+        )
+
+        about_buttons = InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton("Support", url="https://t.me/+o1s-8MppL2syYTI9"),
+                InlineKeyboardButton("Source Code", url="https://github.com/MyselfNeon")
+            ],
+            [
+                InlineKeyboardButton("Home", callback_data="start_btn"),
+                InlineKeyboardButton("Close", callback_data="close_btn")
+            ]
+        ])
+
+        await client.edit_message_text(
+            chat_id=message.chat.id,
+            message_id=message.id,
+            text=about_text,
+            reply_markup=about_buttons,
+            parse_mode=enums.ParseMode.HTML
+        )
+        await callback_query.answer()
+
+    # Home / Start button
+    elif data == "start_btn":
+        start_buttons = InlineKeyboardMarkup([
+            [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ 🤔", callback_data="help_btn")],
+            [
+                InlineKeyboardButton("Support", url="https://t.me/+o1s-8MppL2syYTI9"),
+                InlineKeyboardButton("About", callback_data="about_btn")
+            ]
+        ])
+        await client.edit_message_text(
+            chat_id=message.chat.id,
+            message_id=message.id,
+            text=(
+                f"<blockquote>**__Hellooo {callback_query.from_user.mention}__ 😇**</blockquote>\n"
+                "<blockquote>**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
+                "**__🔑 Please /login First — This Is Required For Downloading Content.__**</blockquote>\n"
+            ),
+            reply_markup=start_buttons
+        )
+        await callback_query.answer()
+
+    # Close button
+    elif data == "close_btn":
+        await client.delete_messages(message.chat.id, [message.id])
+        await callback_query.answer()
         
-
-
-# MyselfNeon
-# Don't Remove Credit 🥺
-# Telegram Channel @NeonFiles
