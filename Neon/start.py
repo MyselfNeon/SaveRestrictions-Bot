@@ -69,7 +69,7 @@ async def send_start(client: Client, message: Message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
 
     buttons = [
-        [InlineKeyboardButton("🦋 Aᴅᴍɪɴ Pᴀɴᴇʟ", url="https://myselfneon.github.io/neon/")],
+        [InlineKeyboardButton("Lᴇᴛs Gᴇᴛ Tʜɪs Pᴀʀᴛʏ Sᴛᴀʀᴛᴇᴅ !!", callback_data="help_btn")],
         [
             InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
             InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/NeonFiles')
@@ -348,4 +348,14 @@ def get_message_type(msg: pyrogram.types.messages_and_media.message.Message):
         return "Text"
     except:
         pass
+
+# -------------------
+# Inline button callback for Admin Panel
+# -------------------
+@Client.on_callback_query()
+async def button_callbacks(client: Client, callback_query):
+    if callback_query.data == "help_btn":
+        await send_help(client, callback_query.message)
+        await callback_query.answer()  # Acknowledge the button press
+        
         
