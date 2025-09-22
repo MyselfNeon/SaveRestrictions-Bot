@@ -79,7 +79,7 @@ async def send_start(client: Client, message: Message):
     await client.send_message(
         chat_id=message.chat.id,
         text=(
-            f"<blockquote>**__Hellooo {message.from_user.mention}__ 😇**</blockquote>\n"
+            f"<blockquote>**__Yoo !! {message.from_user.mention}__ 😇**</blockquote>\n"
             "<blockquote>**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
             "**__🔑 Please /login First — This Is Required For Downloading Content.__**</blockquote>\n"
         ),
