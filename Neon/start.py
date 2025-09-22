@@ -70,8 +70,8 @@ async def send_start(client: Client, message: Message):
     buttons = [
         [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ 🤔", callback_data="help_btn")],
         [
-            InlineKeyboardButton('Uᴘᴅᴀᴛᴇ 😎', url='https://t.me/NeonFiles'),
-            InlineKeyboardButton('Aʙᴏᴜᴛ 📖', callback_data="about_btn")
+            InlineKeyboardButton('Uᴘᴅᴀᴛᴇ 🔔', url='https://t.me/NeonFiles'),
+            InlineKeyboardButton('Aʙᴏᴜᴛ 😎', callback_data="about_btn")
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -396,8 +396,8 @@ async def button_callbacks(client: Client, callback_query):
         start_buttons = InlineKeyboardMarkup([
             [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ 🤔", callback_data="help_btn")],
             [
-                InlineKeyboardButton("Uᴘᴅᴀᴛᴇ 😎", url="https://t.me/NeonFiles"),
-                InlineKeyboardButton("Aʙᴏᴜᴛ 📖", callback_data="about_btn")
+                InlineKeyboardButton("Uᴘᴅᴀᴛᴇ 🔔", url="https://t.me/NeonFiles"),
+                InlineKeyboardButton("Aʙᴏᴜᴛ 😎", callback_data="about_btn")
             ]
         ])
         await client.edit_message_text(
