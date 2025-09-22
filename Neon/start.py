@@ -360,7 +360,7 @@ async def button_callbacks(client: Client, callback_query):
 
         about_text = (
     "<b><blockquote>‣ 📝 𝐌𝐘 𝐃𝐄𝐓𝐀𝐈𝐋𝐒</blockquote>\n\n"
-    "<i>• Mʏ Nᴀᴍᴇ : [{bot_name}](https://t.me/{bot_username})</a>\n"
+    "<i>• Mʏ Nᴀᴍᴇ : <a href='https://t.me/{bot_username}'>{bot_name}</a>\n"
     "• Mʏ Bᴇsᴛ Fʀɪᴇɴᴅ : <a href='tg://settings'>Tʜɪs Sᴡᴇᴇᴛɪᴇ ❤️</a>\n"
     "• Dᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/MyselfNeon'>@MyselfNeon</a>\n"
     "• Lɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>Pʏʀᴏɢʀᴀᴍ</a>\n"
