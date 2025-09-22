@@ -13,7 +13,7 @@ __(You May Need An Unofficial Client To Get The Message ID).__
 https://t.me/b/botusername/4321__  
 
 <blockquote>**__‣ Multi Posts__**</blockquote>
-__Send Public/Private Post Links As Explained Above.__  
+__Send Public/Private Post Links As Explained Above. For Multiple Post(s)__  
 __Use The Format [Start - End] to Send Multiple Messages.__  
 
 **__Examples:**  
