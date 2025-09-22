@@ -376,7 +376,7 @@ async def button_callbacks(client: Client, callback_query):
                 InlineKeyboardButton("Sᴏᴜʀᴄᴇ Cᴏᴅᴇ 💡", url="https://myselfneon.github.io/neon/")
             ],
             [
-                InlineKeyboardButton("Hᴏᴍᴇ 🏠", callback_data="start_btn"),
+                InlineKeyboardButton("⬅️ Bᴀᴄᴋ", callback_data="start_btn"),
                 InlineKeyboardButton("Cʟᴏsᴇ ❌", callback_data="close_btn")
             ]
         ])
