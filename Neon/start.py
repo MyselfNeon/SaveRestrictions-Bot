@@ -79,7 +79,7 @@ async def send_start(client: Client, message: Message):
     await client.send_message(
         chat_id=message.chat.id,
         text=(
-            f"<blockquote>**__Hellooo {message.from_user.mention}__ 😇**</blockquote>\n"
+            f"<blockquote>**__Yoo !! {message.from_user.mention}__ 😇**</blockquote>\n"
             "<blockquote>**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
             "**__🔑 Please /login First — This Is Required For Downloading Content.__**</blockquote>\n"
         ),
@@ -359,8 +359,8 @@ async def button_callbacks(client: Client, callback_query):
         bot_username = me.username
 
         about_text = (
-    "<b><blockquote>‣ 📝 𝐌𝐘 𝐃𝐄𝐓𝐀𝐈𝐋𝐒</blockquote></b>\n\n"
-    "<i>• Mʏ Nᴀᴍᴇ : <a href='https://t.me/{bot_username}'>{bot_name}</a>\n"
+    "<b><blockquote>‣ 📝 𝐌𝐘 𝐃𝐄𝐓𝐀𝐈𝐋𝐒</blockquote>\n\n"
+    "<i>• Mʏ Nᴀᴍᴇ : [{bot_name}](https://t.me/{bot_username})</a>\n"
     "• Mʏ Bᴇsᴛ Fʀɪᴇɴᴅ : <a href='tg://settings'>Tʜɪs Sᴡᴇᴇᴛɪᴇ ❤️</a>\n"
     "• Dᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/MyselfNeon'>@MyselfNeon</a>\n"
     "• Lɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>Pʏʀᴏɢʀᴀᴍ</a>\n"
