@@ -1,3 +1,4 @@
+#Start.py
 import os
 import asyncio
 import random
@@ -69,7 +70,7 @@ async def send_start(client: Client, message: Message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
 
     buttons = [
-        [InlineKeyboardButton("Lᴇᴛs Gᴇᴛ Tʜɪs Pᴀʀᴛʏ Sᴛᴀʀᴛᴇᴅ !!", callback_data="help_btn")],
+        [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ ⁉️", callback_data="help_btn")],
         [
             InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
             InlineKeyboardButton('🍀 Uᴘᴅᴀᴛᴇs', url='https://t.me/NeonFiles')
@@ -83,8 +84,7 @@ async def send_start(client: Client, message: Message):
         text=(
             f"<blockquote>**__Hellooo {message.from_user.mention}__ 😇**</blockquote>\n"
             "<blockquote>**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
-            "**__🔑 Please /login First — This Is Required For Downloading Content.__**\n\n"
-            "**__📖 Use /help to learn more.__**</blockquote>"
+            "**__🔑 Please /login First — This Is Required For Downloading Content.__**</blockquote>\n"
         ),
         reply_markup=reply_markup,
         reply_to_message_id=message.id
@@ -358,4 +358,8 @@ async def button_callbacks(client: Client, callback_query):
         await send_help(client, callback_query.message)
         await callback_query.answer()  # Acknowledge the button press
         
-        
+
+
+# MyselfNeon
+# Don't Remove Credit 🥺
+# Telegram Channel @NeonFiles
