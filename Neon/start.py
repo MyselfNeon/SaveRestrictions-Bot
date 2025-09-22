@@ -70,8 +70,8 @@ async def send_start(client: Client, message: Message):
     buttons = [
         [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ 🤔", callback_data="help_btn")],
         [
-            InlineKeyboardButton('🚀 Sᴜᴘᴘᴏʀᴛ', url='https://t.me/+o1s-8MppL2syYTI9'),
-            InlineKeyboardButton('About', callback_data="about_btn")
+            InlineKeyboardButton('Uᴘᴅᴀᴛᴇ ✨', url='https://t.me/NeonFiles'),
+            InlineKeyboardButton('Aʙᴏᴜᴛ 📖', callback_data="about_btn")
         ]
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
@@ -359,24 +359,25 @@ async def button_callbacks(client: Client, callback_query):
         bot_username = me.username
 
         about_text = (
-            f"• Mʏ Nᴀᴍᴇ : <a href='https://t.me/{bot_username}'>{bot_name}</a>\n"
-            "• Mʏ Bᴇsᴛ Fʀɪᴇɴᴅ : Tʜɪs Sᴡᴇᴇᴛɪᴇ ❤️\n"
-            "• Dᴇᴠᴇʟᴏᴘᴇʀ : @MʏsᴇʟғNᴇᴏɴ\n"
-            "• Lɪʙʀᴀʀʏ : Pʏʀᴏɢʀᴀᴍ\n"
-            "• Lᴀɴɢᴜᴀɢᴇ : Pʏᴛʜᴏɴ 𝟹\n"
-            "• DᴀᴛᴀBᴀsᴇ : Mᴏɴɢᴏ DB\n"
-            "• Bᴏᴛ Sᴇʀᴠᴇʀ : Hᴇʀᴏᴋᴜ\n"
-            "• Bᴜɪʟᴅ Sᴛᴀᴛᴜs : ᴠ𝟸.𝟽.𝟷 [Sᴛᴀʙʟᴇ]"
-        )
+    "<b><blockquote>‣ 📝 𝐌𝐘 𝐃𝐄𝐓𝐀𝐈𝐋𝐒</blockquote></b>\n\n"
+    "<i>• Mʏ Nᴀᴍᴇ : <a href='https://t.me/{bot_username}'>{bot_name}</a>\n"
+    "• Mʏ Bᴇsᴛ Fʀɪᴇɴᴅ : <a href='tg://settings'>Tʜɪs Sᴡᴇᴇᴛɪᴇ ❤️</a>\n"
+    "• Dᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/MyselfNeon'>@MyselfNeon</a>\n"
+    "• Lɪʙʀᴀʀʏ : <a href='https://docs.pyrogram.org/'>Pʏʀᴏɢʀᴀᴍ</a>\n"
+    "• Lᴀɴɢᴜᴀɢᴇ : <a href='https://www.python.org/download/releases/3.0/'>Pʏᴛʜᴏɴ 𝟹</a>\n"
+    "• DᴀᴛᴀBᴀsᴇ : <a href='https://www.mongodb.com/'>Mᴏɴɢᴏ DB</a>\n"
+    "• Bᴏᴛ Sᴇʀᴠᴇʀ : <a href='https://heroku.com'>Hᴇʀᴏᴋᴜ</a>\n"
+    "• Bᴜɪʟᴅ Sᴛᴀᴛᴜs : ᴠ𝟸.𝟽 [Sᴛᴀʙʟᴇ]</i></b>"
+)
 
         about_buttons = InlineKeyboardMarkup([
             [
-                InlineKeyboardButton("Support", url="https://t.me/+o1s-8MppL2syYTI9"),
-                InlineKeyboardButton("Source Code", url="https://github.com/MyselfNeon")
+                InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ 🔊", url="https://t.me/+o1s-8MppL2syYTI9"),
+                InlineKeyboardButton("Sᴏᴜʀᴄᴇ Cᴏᴅᴇ 💡", url="https://myselfneon.github.io/neon/")
             ],
             [
-                InlineKeyboardButton("Home", callback_data="start_btn"),
-                InlineKeyboardButton("Close", callback_data="close_btn")
+                InlineKeyboardButton("Hᴏᴍᴇ 🏠", callback_data="start_btn"),
+                InlineKeyboardButton("Cʟᴏsᴇ ❌", callback_data="close_btn")
             ]
         ])
 
@@ -394,15 +395,15 @@ async def button_callbacks(client: Client, callback_query):
         start_buttons = InlineKeyboardMarkup([
             [InlineKeyboardButton("Hᴏᴡ Tᴏ Usᴇ Mᴇ 🤔", callback_data="help_btn")],
             [
-                InlineKeyboardButton("Support", url="https://t.me/+o1s-8MppL2syYTI9"),
-                InlineKeyboardButton("About", callback_data="about_btn")
+                InlineKeyboardButton("Uᴘᴅᴀᴛᴇ ✨", url="https://t.me/NeonFiles"),
+                InlineKeyboardButton("Aʙᴏᴜᴛ 📖", callback_data="about_btn")
             ]
         ])
         await client.edit_message_text(
             chat_id=message.chat.id,
             message_id=message.id,
             text=(
-                f"<blockquote>**__Hellooo {callback_query.from_user.mention}__ 😇**</blockquote>\n"
+                f"<blockquote>**__Yoo !! {callback_query.from_user.mention}__ 👋**</blockquote>\n"
                 "<blockquote>**__I’m Save Restricted Content Bot. I Can Help You Unlock And Save Restricted Posts From Telegram By Their Links.__**\n\n"
                 "**__🔑 Please /login First — This Is Required For Downloading Content.__**</blockquote>\n"
             ),
