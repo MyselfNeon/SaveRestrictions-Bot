@@ -35,7 +35,7 @@ class Bot(Client):
             f"**- __@{me.username}__**\n\n"
             f"**- __Date:__** __{now.strftime('%d-%b-%Y')}__\n"
             f"**- __Time:__** __{now.strftime('%I:%M %p')}__\n"
-            f"**- __@neonfiles__**"
+            f"**- __@neonfiles __**"
         )
         try:
             await self.send_message(LOG_CHANNEL, text)
